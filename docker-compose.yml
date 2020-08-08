@@ -1,12 +1,8 @@
 version: "3.7"
 
 services:
-  ingress:
-    image: nginx:1.18.0-alpine
-    container_name: raddest-ingress
+  backend:
+    image: teamdman/raddest-backend:latest
+    build: backend
     ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./ingress/nginx:/etc/nginx/conf.d
-      - ./ingress/www:/usr/share/nginx
+      - 8080:8080
