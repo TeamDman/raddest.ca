@@ -9,3 +9,8 @@ services:
       - 8080:8080
     environment:
       SESSION_SECRET: ${SESSION_SECRET:-howdypartner}
+    volumes:
+      - ./backend/app/src:/app/src:ro,delegated
+      - ./backend/app/dist:/app/dist
+      - ./backend/app/scripts:/app/scripts
+    command: ["scripts/serve.sh"]
