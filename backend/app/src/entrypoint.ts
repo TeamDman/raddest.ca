@@ -19,7 +19,14 @@ initializePassport(
   (id) => users.find((user) => user.id === id)
 );
 
-const users = [];
+const users: User[] = [
+  {
+    id: "1596851517399",
+    name: "a",
+    email: "a@a",
+    password: "$2b$10$DsAO9Lz1dUO7k.4SYhneoO722bWqbYQbAmryGxvdJubo0uxPA2wva",
+  },
+];
 
 interface User {
   id: string;
@@ -60,6 +67,10 @@ app.post(
     failureFlash: true,
   })
 );
+
+app.get("/info", checkAuthenticated, (req, res) => {
+  res.json(users);
+});
 
 app.get("/register", checkNotAuthenticated, (req, res) => {
   res.render("register.ejs");

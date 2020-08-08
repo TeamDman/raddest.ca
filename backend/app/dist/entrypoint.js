@@ -44,7 +44,14 @@ const method_override_1 = __importDefault(require("method-override"));
 const app = express_1.default();
 const passport_config_1 = require("./passport-config");
 passport_config_1.initializePassport(passport_1.default, (email) => users.find((user) => user.email === email), (id) => users.find((user) => user.id === id));
-const users = [];
+const users = [
+    {
+        id: "1596851517399",
+        name: "a",
+        email: "a@a",
+        password: "$2b$10$DsAO9Lz1dUO7k.4SYhneoO722bWqbYQbAmryGxvdJubo0uxPA2wva",
+    },
+];
 app.set("view-engine", "ejs");
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(express_flash_1.default());
@@ -68,6 +75,9 @@ app.post("/login", checkNotAuthenticated, passport_1.default.authenticate("local
     failureRedirect: "/login",
     failureFlash: true,
 }));
+app.get("/info", checkAuthenticated, (req, res) => {
+    res.json(users);
+});
 app.get("/register", checkNotAuthenticated, (req, res) => {
     res.render("register.ejs");
 });
